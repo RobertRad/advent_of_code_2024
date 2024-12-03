@@ -1,3 +1,9 @@
 node_modules/
 dist/
 
+# The actual package versions don't matter for this use case
+package-lock.json
+
+# Inputs should not be distributed
+input.txt
+
