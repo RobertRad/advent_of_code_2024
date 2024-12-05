@@ -1,12 +1,5 @@
-import { readFileSync } from 'fs';
-import path from 'path';
 import invariant from 'tiny-invariant';
-
-function readFileContent(mode?: 'PUZZLE_INPUT' | 'TEST_ONLY'): string {
-  const fileName = mode === 'TEST_ONLY' ? 'test.txt' : 'input.txt';
-  const file = path.resolve(__dirname, '..', fileName);
-  return readFileSync(file, 'utf8');
-}
+import { Mode, readFileContent } from '../../utils/readFileContent';
 
 function parseInput(input: string): { leftList: number[]; rightList: number[] } {
   return input
@@ -39,7 +32,7 @@ function part1(leftList: number[], rightList: number[]) {
     const diff = Math.abs(leftItem - rightItem);
     sum += diff;
   });
-  console.log('Part1:', sum);
+  console.log('Day 01, Part1:', sum);
 }
 
 function part2(leftList: number[], rightList: number[]) {
@@ -50,10 +43,12 @@ function part2(leftList: number[], rightList: number[]) {
     const similarityScore = leftItem * numberOfTimes;
     sum += similarityScore;
   });
-  console.log('Part2:', sum);
+  console.log('Day 01, Part2:', sum);
 }
 
-const content = readFileContent();
-const parsed = parseInput(content);
-part1(parsed.leftList, parsed.rightList);
-part2(parsed.leftList, parsed.rightList);
+export function day01() {
+  const content = readFileContent(Mode.PUZZLE_INPUT, 1);
+  const parsed = parseInput(content);
+  part1(parsed.leftList, parsed.rightList);
+  part2(parsed.leftList, parsed.rightList);
+}
